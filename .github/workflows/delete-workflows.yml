@@ -1,0 +1,22 @@
+name: Delete all workflow runs
+
+on:
+  workflow_dispatch:   # 手动触发，方便控制
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write    # 删除 workflow runs 必需
+      contents: write   # 如果还要删 releases/tags 才需要
+
+    steps:
+      - name: Delete releases and workflows runs
+        uses: ophub/delete-releases-workflows@main
+        with:
+          # 只删除 workflow 运行记录（不删 releases）
+          delete_releases: false
+          delete_workflows: true
+          workflows_keep_day: 0          # 设为 0 表示删除所有不匹配关键字的运行记录
+          # workflows_keep_keyword: ""   # 不填或留空，就不保留任何关键字匹配的记录
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
