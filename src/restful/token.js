@@ -426,4 +426,10 @@ function shouldArchiveDeletion(mode) {
     );
 }
 
-export { createTokenItem, deleteTokenItem, consumeShareToken, findShareToken };
+export { 
+    createTokenItem, 
+    deleteTokenItem, 
+    consumeShareToken, 
+    findShareToken,
+    consumeShareToken as consumeShareTokenForRequest   // 新增这一行
+};
